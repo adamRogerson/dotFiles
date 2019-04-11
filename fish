@@ -1,0 +1,1 @@
+/home/arogerson/.config/fish/
