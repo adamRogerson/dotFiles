@@ -3,7 +3,7 @@
 
 cp -r ~/.vim/ ~/Software/dotFiles/.vim
 cp -r ~/.config/config.fish ~/Software/dotFiles/fish
-cp -r ~/.config/fish/functions ~/Software/dotFiles/fish
+cp -r ~/.config/fish/functions ~/Software/dotFiles/fish/functions
 
 pushd ~/Software/dotFiles/
 git add .
