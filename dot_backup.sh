@@ -5,5 +5,7 @@ cp -r ~/.vim/ ~/Software/dotFiles/.vim
 cp -r ~/.config/fish ~/Software/dotFiles/fish
 
 pushd ~/Software/dotFiles/
-
+git add .
+git commit -m "Auto backup via cron"
+git push
 
