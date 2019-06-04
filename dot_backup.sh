@@ -1,12 +1,13 @@
 #!/bin/bash
 #Dumb script to be called by cron to backup dot files and push to git if fail will post mail
 
-cp -r ~/.vim/ ~/Software/dotFiles/.vim
-cp -r ~/.config/config.fish ~/Software/dotFiles/fish/
-cp -r ~/.config/fish/functions ~/Software/dotFiles/fish/function
+BACKUP_LOCATION="~/Software/dotFiles"
+
+cp -r ~/.vim .
+cp -r ~/.config/fish/functions ./fish 
 
 pushd ~/Software/dotFiles/
-git add .
-git commit -m "Auto backup via cron"
-git push
-
+#git add .
+#git commit -m "Auto backup via cron"
+#git push
+popd
