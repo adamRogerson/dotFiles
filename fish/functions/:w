@@ -1,0 +1,4 @@
+function lookup 
+    set selected (man -k $argv | dmenu -l 10 | awk '{print $1}')
+    man $selected
+end
