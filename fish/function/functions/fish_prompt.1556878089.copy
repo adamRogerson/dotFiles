@@ -24,7 +24,7 @@ function fish_prompt
     switch (pwd)
 
     case "/root"
-        printf "~"
+        printf "/"
 
     case "/home/arogerson"
         printf "~"

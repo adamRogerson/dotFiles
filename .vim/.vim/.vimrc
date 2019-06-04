@@ -4,9 +4,8 @@
 
 execute pathogen#infect()
 
-"normal stuff
-"-------------------------------------------------------------------------
-"
+"Basic stuff -----------------------------------------------------------------------------
+
 syntax on
 set nocompatible
 let mapleader = "\<Space>"
@@ -16,11 +15,19 @@ set shiftwidth=4
 set number
 set spell spelllang=en_us
 set laststatus=2
+set wildmenu
+set smartindent
+set scrolloff=1
+
+" search 
+set incsearch
+set smartcase
+set ignorecase
 
 
 " pretty stuff
 set t_Co=256
-set guifont=Monospace\ 14 
+set guifont=Monospace\ 12 
 colorscheme badwolf 
 
 
@@ -62,26 +69,31 @@ nnoremap <Leader>l <C-W><C-L>
 nnoremap <Leader>h <C-W><C-H>
 
 
-"buffer fun 
+"Buffer Stuff--------------------------------------------------------
+set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+
+"Tab over open buffers  
 nmap <Tab> :bnext<CR> 
 
+"kills current buffer and swaps to next one
 nnoremap q<Tab> :bp\|bd #<CR>
- "kills current buffer and swaps to next one
+
+map <Leader>b :ls<CR>:b<space>
 
 
-"Python stuff
-"-----------------------------------------------------------------------
-
-"compile python script with , z 
-au BufEnter,BufRead *.py noremap <silent> <leader>z :w !python %<CR>
-
-"make color at word 80
-au BufEnter,BufRead *.py set colorcolumn=80
+"--Bufline--------------------------------------------------------------------------------
+let g:bufferline_show_bufnr = 0
+let g:bufferline_solo_highlight = 0
+let g:bufferline_show_bufnr = 0
 
 
+"Macros ----------------------------------------------------------------------------------
 
-"Plugins
-"-------------------------------------------------------------------------
+"first char gets chopped for some reason
+let @p ='iimport pdb;pdb.set_trace()'
+
+
+"Plugins ---------------------------------------------------------------------------------
 
 "--Bufline------------------------------------------------------------
 let g:bufferline_show_bufnr = 0
@@ -89,4 +101,83 @@ let g:bufferline_solo_highlight = 0
 let g:bufferline_show_bufnr = 0
 
 
+"Python stuff ----------------------------------------------------------------------------
 
+"compile python script with , z 
+au BufEnter,BufRead *.py noremap <silent> <leader>z :w !python3 %<CR>
+
+"make color at word 80
+au BufEnter,BufRead *.py set colorcolumn=110
+
+
+"C stuff ---------------------------------------------------------------------------------
+
+"make color bar at word 110 
+au BufEnter,BufRead *.c,*h set colorcolumn=110
+
+
+if has("cscope")
+    set csprg=cscope
+    set csto=0
+    set cst
+    "Non-verbose - remove adding database output
+    set nocsverb
+    "Add cscope database
+    cs add ./cscope.out
+endif
+
+func FIND_IN_CSCOPE(arg)
+    let a=expand("<cword>")
+    if (a:arg == "s")
+        exe "cscope find s" a
+    elseif (a:arg == "g")
+        exe "cscope find g" a
+    elseif (a:arg == "c")
+        exe "cscope find c" a
+    elseif (a:arg == "f")
+        exe "cscope find f" a
+    elseif (a:arg == "e")
+        exe "cscope find e" a
+    elseif (a:arg == "i")
+        exe "cscope find i" a
+    elseif (a:arg == "a")
+        exe "cscope find t" a
+    endif
+endfunction
+
+" Find symbol
+map fs :call FIND_IN_CSCOPE("s")<CR>
+" Find definition
+map fd :call FIND_IN_CSCOPE("g")<CR>
+" Find text
+map ft :call FIND_IN_CSCOPE("t")<CR>
+" Find function calling this function
+map fc :call FIND_IN_CSCOPE("c")<CR>
+" Find file
+map ff :call FIND_IN_CSCOPE("f")<CR>
+
+
+"--Custom Functions-----------------------------------------------------------------------
+
+"Redir runs a unix command and puts the output in a scratch file 
+"Example Redir(!ls)
+function! R(cmd)
+	for win in range(1, winnr('$'))
+		if getwinvar(win, 'scratch')
+			execute win . 'windo close'
+		endif
+	endfor
+	if a:cmd =~ '^!'
+		execute "let output = system('" . substitute(a:cmd, '^!', '', '') . "')"
+	else
+		redir => output
+		execute a:cmd
+		redir END
+	endif
+	vnew
+	let w:scratch = 1
+	setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
+	call setline(1, split(output, "\n"))
+endfunction
+
+command! -nargs=1 -complete=command Redir silent call Redir(<f-args>)
