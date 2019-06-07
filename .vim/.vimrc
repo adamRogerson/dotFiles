@@ -159,7 +159,7 @@ map ff :call FIND_IN_CSCOPE("f")<CR>
 
 "--Custom Functions-----------------------------------------------------------------------
 
-"Redir runs a unix command and puts the output in a scratch file 
+"Redir runs a shell command and puts the output in a scratch file 
 "Example Redir(!ls)
 function! R(cmd)
 	for win in range(1, winnr('$'))
