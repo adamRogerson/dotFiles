@@ -114,6 +114,9 @@ au BufEnter,BufRead *.py set colorcolumn=110
 
 "make color bar at word 110 
 au BufEnter,BufRead *.c,*h set colorcolumn=110
+"nmap key :!make && ./a.out<CR>
+
+nnoremap <leader>m :silent make && ./a.out<CR>
 
 
 if has("cscope")
