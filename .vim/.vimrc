@@ -50,18 +50,16 @@ highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Re
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
 
+"Custom Generic Highlights 
+highlight red cterm=bold ctermbg=darkred guibg=darkred
+highlight green cterm=bold ctermbg=darkgreen guibg=darkgreen
+highlight blue cterm=bold ctermbg=darkblue guibg=darkblue
+
 
 
 
 "Custom Bindings
 "-----------------------------------------------------------------------
-
-"allows copy/pasta with normal letters
-vmap <Leader>y "+y
-vmap <Leader>p "+p
-nmap <Leader>p "+p
-nmap <Leader>y "+y
-
 "allow move from split with leader and direction 
 nnoremap <Leader>j <C-W><C-J>
 nnoremap <Leader>k <C-W><C-K>
@@ -114,9 +112,7 @@ au BufEnter,BufRead *.py set colorcolumn=110
 
 "make color bar at word 110 
 au BufEnter,BufRead *.c,*h set colorcolumn=110
-"nmap key :!make && ./a.out<CR>
 
-nnoremap <leader>m :silent make && ./a.out<CR>
 
 
 if has("cscope")
