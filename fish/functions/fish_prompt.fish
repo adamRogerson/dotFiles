@@ -6,11 +6,11 @@ function fish_prompt
 #Hostname  
     set _hostname (hostname)
     if [ $_hostname = "arogerson-laptop" ]
-        set_color ff5900
+        set_color ff0000
         printf "laptop " 
 
     else if [ $_hostname = "adam-latop" ]
-        set_color ff5900
+        set_color ff0000
         printf "laptop " 
 
     else
