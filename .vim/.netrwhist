@@ -1,6 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =5
 let g:netrw_dirhist_1='/root/python-networkmanager'
 let g:netrw_dirhist_2='/etc/sysconfig/network-scripts'
 let g:netrw_dirhist_3='/root/python-networkmanager/examples'
 let g:netrw_dirhist_4='/tmp'
+let g:netrw_dirhist_5='/home/adam/Software/personal/riot'
