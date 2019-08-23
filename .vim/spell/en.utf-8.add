@@ -11,15 +11,12 @@ workspace4
 workspace5
 bindsym
 assign
-alsa
 gsm
-tt
 SSRC
 rb
 num
 ssrc
 EOF
-de
 assertTrue
 assertIs
 assertIsInstance
@@ -67,7 +64,6 @@ oper
 admin_state
 cron
 Pre
-tock
 NAS
 darkviolet
 ENQUIRY
@@ -80,4 +76,3 @@ uplink
 PDP
 TAC
 tac
-subsequence
