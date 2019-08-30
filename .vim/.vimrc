@@ -18,8 +18,10 @@ set laststatus=2
 set wildmenu
 set smartindent
 set scrolloff=1
+set path+=** "Allows find to be recurive from current directory
 
-" search 
+
+" search related
 set incsearch
 set smartcase
 set ignorecase
@@ -37,6 +39,7 @@ set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove scroll bar 
 set guioptions-=L  "remove scroll bar 
 
+
 " Netrw settings
 let g:netrw_banner = 0
 let g:netrw= "right" "fixes everything highlighted bug
@@ -50,16 +53,23 @@ highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Re
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
 
+
 "Custom Generic Highlights 
 highlight red cterm=bold ctermbg=darkred guibg=darkred
 highlight green cterm=bold ctermbg=darkgreen guibg=darkgreen
 highlight blue cterm=bold ctermbg=darkblue guibg=darkblue
 
 
-
-
 "Custom Bindings
 "-----------------------------------------------------------------------
+
+"allows copy/pasta with normal letters
+vmap <Leader>y "+y
+vmap <Leader>p "+p
+nmap <Leader>p "+p
+nmap <Leader>y "+y
+
+
 "allow move from split with leader and direction 
 nnoremap <Leader>j <C-W><C-J>
 nnoremap <Leader>k <C-W><C-K>
@@ -70,7 +80,8 @@ nnoremap <Leader>h <C-W><C-H>
 "Buffer Stuff--------------------------------------------------------
 set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
-"Tab over open buffers  
+
+"Tab opens next buffers  
 nmap <Tab> :bnext<CR> 
 
 "kills current buffer and swaps to next one
@@ -112,7 +123,9 @@ au BufEnter,BufRead *.py set colorcolumn=110
 
 "make color bar at word 110 
 au BufEnter,BufRead *.c,*h set colorcolumn=110
+"nmap key :!make && ./a.out<CR>
 
+nnoremap <leader>m :silent make && ./a.out<CR>
 
 
 if has("cscope")
