@@ -60,15 +60,10 @@ highlight green cterm=bold ctermbg=darkgreen guibg=darkgreen
 highlight blue cterm=bold ctermbg=darkblue guibg=darkblue
 
 
-"Custom Bindings
-"-----------------------------------------------------------------------
+"Macros and Custom Bindings ----------------------------------------------------------------------------------
 
-"allows copy/pasta with normal letters
-vmap <Leader>y "+y
-vmap <Leader>p "+p
-nmap <Leader>p "+p
-nmap <Leader>y "+y
-
+"first char gets chopped for some reason
+let @p ='iimport pdb;pdb.set_trace()'
 
 "allow move from split with leader and direction 
 nnoremap <Leader>j <C-W><C-J>
@@ -77,37 +72,25 @@ nnoremap <Leader>l <C-W><C-L>
 nnoremap <Leader>h <C-W><C-H>
 
 
-"Buffer Stuff--------------------------------------------------------
-set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+"Plugins ---------------------------------------------------------------------------------
 
+"--Bufline------------------------------------------------------------
+set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+let g:bufferline_show_bufnr = 0
+let g:bufferline_solo_highlight = 0
+let g:bufferline_show_bufnr = 0
 
 "Tab opens next buffers  
 nmap <Tab> :bnext<CR> 
 
 "kills current buffer and swaps to next one
 nnoremap q<Tab> :bp\|bd #<CR>
-
 map <Leader>b :ls<CR>:b<space>
 
 
-"--Bufline--------------------------------------------------------------------------------
-let g:bufferline_show_bufnr = 0
-let g:bufferline_solo_highlight = 0
-let g:bufferline_show_bufnr = 0
+"--Undotree-----------------------------------------------------------
+nnoremap <leader>u :UndotreeToggle<cr>
 
-
-"Macros ----------------------------------------------------------------------------------
-
-"first char gets chopped for some reason
-let @p ='iimport pdb;pdb.set_trace()'
-
-
-"Plugins ---------------------------------------------------------------------------------
-
-"--Bufline------------------------------------------------------------
-let g:bufferline_show_bufnr = 0
-let g:bufferline_solo_highlight = 0
-let g:bufferline_show_bufnr = 0
 
 
 "Python stuff ----------------------------------------------------------------------------
@@ -119,6 +102,8 @@ au BufEnter,BufRead *.py noremap <silent> <leader>z :w !python3 %<CR>
 au BufEnter,BufRead *.py set colorcolumn=110
 
 
+
+
 "C stuff ---------------------------------------------------------------------------------
 
 "make color bar at word 110 
@@ -128,45 +113,7 @@ au BufEnter,BufRead *.c,*h set colorcolumn=110
 nnoremap <leader>m :silent make && ./a.out<CR>
 
 
-if has("cscope")
-    set csprg=cscope
-    set csto=0
-    set cst
-    "Non-verbose - remove adding database output
-    set nocsverb
-    "Add cscope database
-    cs add ./cscope.out
-endif
 
-func FIND_IN_CSCOPE(arg)
-    let a=expand("<cword>")
-    if (a:arg == "s")
-        exe "cscope find s" a
-    elseif (a:arg == "g")
-        exe "cscope find g" a
-    elseif (a:arg == "c")
-        exe "cscope find c" a
-    elseif (a:arg == "f")
-        exe "cscope find f" a
-    elseif (a:arg == "e")
-        exe "cscope find e" a
-    elseif (a:arg == "i")
-        exe "cscope find i" a
-    elseif (a:arg == "a")
-        exe "cscope find t" a
-    endif
-endfunction
-
-" Find symbol
-map fs :call FIND_IN_CSCOPE("s")<CR>
-" Find definition
-map fd :call FIND_IN_CSCOPE("g")<CR>
-" Find text
-map ft :call FIND_IN_CSCOPE("t")<CR>
-" Find function calling this function
-map fc :call FIND_IN_CSCOPE("c")<CR>
-" Find file
-map ff :call FIND_IN_CSCOPE("f")<CR>
 
 
 "--Custom Functions-----------------------------------------------------------------------
