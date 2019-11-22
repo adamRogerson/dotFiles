@@ -14,11 +14,17 @@ set tabstop=4
 set shiftwidth=4
 set number
 set spell spelllang=en_us
-set laststatus=2
 set wildmenu
-set smartindent
 set scrolloff=1
 set path+=** "Allows find to be recurive from current directory
+
+
+" Status line
+set laststatus=2 
+set statusline+=%n:
+set statusline+=%<%f
+set statusline+=%h%m%r%=%-14.(%l,%c%V%)\ %P
+
 
 
 " search related
@@ -71,11 +77,13 @@ nnoremap <Leader>k <C-W><C-K>
 nnoremap <Leader>l <C-W><C-L>
 nnoremap <Leader>h <C-W><C-H>
 
+"Cleans doggy files
+command Lines execute "%s/\\n/\r/g"
+
 
 "Plugins ---------------------------------------------------------------------------------
 
 "--Bufline------------------------------------------------------------
-set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 let g:bufferline_show_bufnr = 0
 let g:bufferline_solo_highlight = 0
 let g:bufferline_show_bufnr = 0
@@ -91,8 +99,6 @@ map <Leader>b :ls<CR>:b<space>
 "--Undotree-----------------------------------------------------------
 nnoremap <leader>u :UndotreeToggle<cr>
 
-
-
 "Python stuff ----------------------------------------------------------------------------
 
 "compile python script with , z 
@@ -101,19 +107,14 @@ au BufEnter,BufRead *.py noremap <silent> <leader>z :w !python3 %<CR>
 "make color at word 80
 au BufEnter,BufRead *.py set colorcolumn=110
 
+"Jenkins stuff
+autocmd BufRead,BufNewFile *[jJ]enkins* set syntax=groovy 
 
+"Sh 
+au BufEnter,BufRead *.sh set nonu 
 
-
-"C stuff ---------------------------------------------------------------------------------
-
-"make color bar at word 110 
-au BufEnter,BufRead *.c,*h set colorcolumn=110
-"nmap key :!make && ./a.out<CR>
-
-nnoremap <leader>m :silent make && ./a.out<CR>
-
-
-
+"Make
+autocmd BufRead,BufNewFile *[Mm]ake* set noet 
 
 
 "--Custom Functions-----------------------------------------------------------------------

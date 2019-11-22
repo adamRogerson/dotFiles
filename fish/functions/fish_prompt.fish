@@ -1,51 +1,60 @@
+set __fish_git_prompt_showupstream = auto
+set __fish_git_prompt_showcolorhints
+
+set -g fish_prompt_pwd_dir_length 5
+
 function fish_prompt
 
-    set_color ffffff 
-    printf [
 
-#Hostname  
-    set _hostname (hostname)
-    if [ $_hostname = "arogerson-laptop" ]
-        set_color ff0000
-        printf "laptop " 
+    set _name (hostname | cut -c 1-15)
 
-    else if [ $_hostname = "adam-latop" ]
-        set_color ff0000
-        printf "laptop " 
+    if [ $_name = "ROGERSON-LT" ]
+        set_color ff0027 
+        printf "" 
+
+    else if [ $_name = "adam-latop" ]
+        set_color ff5900
+        printf "" 
 
     else
         set_color ff5900
-        printf (hostname | cut -c 1-15) 
-        printf " " 
+        printf ($_name) 
+        printf "" 
     end
+
    
 #Directory path
-    set_color 7B68EE 
-    switch (pwd)
+    set_color 5c9143 
 
-    case "/root"
-        printf "~"
-
-    case "/home/arogerson"
-        printf "~"
-
-    case "*"
-        printf (basename (pwd) )
-
-    end
-    
-
-    set date (date "+%I:%M")
-    set jobs_count (jobs | wc -l)
+    printf (prompt_pwd ) 
 
     set_color ffffff 
-    printf " " 
-    printf $date 
-    if test $jobs_count != 0
-        printf " " 
-        set_color ff0026 
-        printf J$jobs_count
+    printf " :"
+    
+
+
+#Git
+    printf '%s ' (__fish_git_prompt)
+
+end
+
+
+
+
+function fish_right_prompt 
+#Date
+        set date (date "+%I:%M")
+        set jobs_count (jobs | wc -l | tr -d '[:space:]')
+
         set_color ffffff 
-    end
-    printf "] "
+        printf " " 
+        printf $date 
+
+#Jobs
+        if test $jobs_count != 0
+            printf " " 
+            set_color ff0026 
+            printf J$jobs_count
+            set_color ffffff 
+end
 end
