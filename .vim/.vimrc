@@ -4,7 +4,9 @@
 
 execute pathogen#infect()
 
-"Basic stuff -----------------------------------------------------------------------------
+"===========================================================================
+"====================== Basics =============================================
+"===========================================================================
 
 syntax on
 set nocompatible
@@ -16,15 +18,6 @@ set number
 set spell spelllang=en_us
 set wildmenu
 set scrolloff=1
-set path+=** "Allows find to be recurive from current directory
-
-
-" Status line
-set laststatus=2 
-set statusline+=%n:
-set statusline+=%<%f
-set statusline+=%h%m%r%=%-14.(%l,%c%V%)\ %P
-
 
 
 " search related
@@ -39,6 +32,13 @@ set guifont=Monospace\ 12
 colorscheme badwolf 
 
 
+" Status line
+set laststatus=2 
+set statusline+=%n:
+set statusline+=%<%f
+set statusline+=%h%m%r%=%-14.(%l,%c%V%)\ %P
+
+
 " sidebar GUI options
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
@@ -51,6 +51,7 @@ let g:netrw_banner = 0
 let g:netrw= "right" "fixes everything highlighted bug
 let g:netrw_list_hide= '.*\.swp$,.*\.py[co]'
 let g:netrw_liststyle=3
+let g:netrw_winsize = 25
 
 
 " Esay color for diff
@@ -66,7 +67,9 @@ highlight green cterm=bold ctermbg=darkgreen guibg=darkgreen
 highlight blue cterm=bold ctermbg=darkblue guibg=darkblue
 
 
-"Macros and Custom Bindings ----------------------------------------------------------------------------------
+"===========================================================================
+"====================== Macros and custom Bindings =========================
+"===========================================================================
 
 "first char gets chopped for some reason
 let @p ='iimport pdb;pdb.set_trace()'
@@ -77,13 +80,18 @@ nnoremap <Leader>k <C-W><C-K>
 nnoremap <Leader>l <C-W><C-L>
 nnoremap <Leader>h <C-W><C-H>
 
-"Cleans doggy files
-command Lines execute "%s/\\n/\r/g"
+"Open lex 
+nnoremap <Leader>e :Lex <CR>
+
+nnoremap <Leader>] :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%<' . line('.') . 'l\S', 'be')<CR>
+nnoremap <Leader>[ :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%>' . line('.') . 'l\S', 'e')<CR>
 
 
-"Plugins ---------------------------------------------------------------------------------
+"===========================================================================
+"============================= Plugins =====================================
+"===========================================================================
 
-"--Bufline------------------------------------------------------------
+"--Bufline---------------------------------------------------
 let g:bufferline_show_bufnr = 0
 let g:bufferline_solo_highlight = 0
 let g:bufferline_show_bufnr = 0
@@ -96,10 +104,17 @@ nnoremap q<Tab> :bp\|bd #<CR>
 map <Leader>b :ls<CR>:b<space>
 
 
-"--Undotree-----------------------------------------------------------
+"--Undotree--------------------------------------------------
 nnoremap <leader>u :UndotreeToggle<cr>
 
-"Python stuff ----------------------------------------------------------------------------
+"--Ack-Vim---------------------------------------------------
+noremap <Leader>a :Ack <cword><cr>
+
+"===========================================================================
+"============================= File specific ===============================
+"===========================================================================
+
+"Python stuff ----------------------------------------------
 
 "compile python script with , z 
 au BufEnter,BufRead *.py noremap <silent> <leader>z :w !python3 %<CR>
@@ -107,17 +122,22 @@ au BufEnter,BufRead *.py noremap <silent> <leader>z :w !python3 %<CR>
 "make color at word 80
 au BufEnter,BufRead *.py set colorcolumn=110
 
-"Jenkins stuff
+"Jenkins stuff ----------------------------------------------
 autocmd BufRead,BufNewFile *[jJ]enkins* set syntax=groovy 
 
-"Sh 
+"Sh ---------------------------------------------------------
 au BufEnter,BufRead *.sh set nonu 
 
-"Make
+"Make -------------------------------------------------------
 autocmd BufRead,BufNewFile *[Mm]ake* set noet 
 
+"YAML
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
-"--Custom Functions-----------------------------------------------------------------------
+
+"===========================================================================
+"====================== Custom Functions ===================================
+"===========================================================================
 
 "Redir runs a shell command and puts the output in a scratch file 
 "Example Redir(!ls)
@@ -141,3 +161,11 @@ function! R(cmd)
 endfunction
 
 command! -nargs=1 -complete=command Redir silent call Redir(<f-args>)
+
+"Plugin doohicky
+" Load all plugins now.
+" Plugins need to be added to runtimepath before helptags can be generated.
+packloadall
+" Load all of the helptags now, after plugins have been loaded.
+" All messages and errors will be ignored.
+silent! helptags ALL
