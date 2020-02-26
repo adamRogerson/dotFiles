@@ -1,11 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/Users/adam.rogerson/iii/DevOps/iii-lab-ansible/roles/create_jenkins_slave/tasks'
-let g:netrw_dirhist_2='/Users/adam.rogerson/iii/DevOps/iii-lab-ansible/roles/create_jenkins_slave/files'
-let g:netrw_dirhist_3='/Users/adam.rogerson/iii/DevOps/iii-lab-ansible/roles/create_jenkins_slave/tests'
-let g:netrw_dirhist_4='/Users/adam.rogerson/iii/DevOps/iii-lab-ansible/roles/create_jenkins_slave'
-let g:netrw_dirhist_5='/Users/adam.rogerson/iii/DevOps/iii-lab-ansible/roles/create_jenkins_slave/tasks'
-let g:netrw_dirhist_6='/Users/adam.rogerson/iii/DevOps/iii-lab-ansible/roles/create_jenkins_slave/tests'
-let g:netrw_dirhist_7='/Users/adam.rogerson/iii/DevOps/iii-lab-ansible/roles/create_jenkins_slave'
-let g:netrw_dirhist_8='/Users/adam.rogerson/iii/DevOps/iii-lab-ansible/roles/create_jenkins_slave/tasks'
-let g:netrw_dirhist_9='/Users/adam.rogerson/iii/DevOps/iii-lab-ansible/jenkins'
+let g:netrw_dirhist_cnt =6
