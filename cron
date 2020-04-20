@@ -1,1 +1,1 @@
-0 11 * * 6  sh /Users/adam.rogerson/Software/personal/dotFiles/dot_backup.sh
+0 11 * * 6  sh /home/adam/Personal/dotFiles/dot_backup.sh
