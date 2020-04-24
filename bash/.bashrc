@@ -1,11 +1,22 @@
 #Adams bashrc. 
 
 . ~/.bash_aliases
+source ~/.git-completion.bash
+source ~/.git-prompt.sh
 
 # History 
 HISTSIZE=1000
 HISTFILESIZE=2000
 HISTCONTROL=ignoreboth
+
+
+
+#Git stuff 
+
+#GIT_PS1_SHOWSTASHSTATE=1 #Shows stash status 
+#GIT_PS1_SHOWUNTRACKEDFILES=1 #Shows if all files are tracked
+#GIT_PS1_SHOWDIRTYSTATE=1 #Shows "cleaness"
+GIT_PS1_SHOWUPSTREAM="auto"
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -40,7 +51,7 @@ esac
 #PROMPT_DIRTRIM=2
 
 #PS1='\[$(tput sc; rightprompt; tput rc)\][\u:\e[0;31m\]\w\[\e[0m\]]$ '
-PS1='\[$(tput sc; tput rc)\][\u:\e[0;31m\]\w\[\e[0m\]]$ '
+PS1='\[$(tput sc; tput rc)\][\u: \e[0;31m\]\w\[\e[0m\]] $(__git_ps1 "{%s}")$ '
 
 
 # enable programmable completion features (you don't need to enable
