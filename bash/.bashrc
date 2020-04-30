@@ -17,6 +17,7 @@ HISTCONTROL=ignoreboth
 #GIT_PS1_SHOWUNTRACKEDFILES=1 #Shows if all files are tracked
 #GIT_PS1_SHOWDIRTYSTATE=1 #Shows "cleaness"
 GIT_PS1_SHOWUPSTREAM="auto"
+GIT_PS1_SHOWCOLORHINTS=1 #Adds color
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -51,7 +52,7 @@ esac
 #PROMPT_DIRTRIM=2
 
 #PS1='\[$(tput sc; rightprompt; tput rc)\][\u:\e[0;31m\]\w\[\e[0m\]]$ '
-PS1='\[$(tput sc; tput rc)\][\u: \e[0;31m\]\w\[\e[0m\]] $(__git_ps1 "{%s}")$ '
+PS1='\[$(tput sc; tput rc)\][\u: \e[0;31m\]\w\[\e[0m\]]$(__git_ps1 " {%s}")> '
 
 
 # enable programmable completion features (you don't need to enable
