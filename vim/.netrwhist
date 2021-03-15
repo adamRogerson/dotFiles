@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =8
+let g:netrw_dirhist_8='/home/adam/PS/config/platformsh-enterprise/beans/platform_standard/manifests'
+let g:netrw_dirhist_7='/home/adam/PS/config/platformsh-enterprise/beans/platform_standard'
+let g:netrw_dirhist_6='/home/adam/PS/infra/checkmate'
+let g:netrw_dirhist_5='/tmp'
+let g:netrw_dirhist_4='/home/adam/PS/infra/images/box-ec2-blackfire/.gitlab'
+let g:netrw_dirhist_3='/home/adam/PS/infra/images/box-ec2-blackfire'
+let g:netrw_dirhist_2='/home/adam/PS/infra/images/box-ec2-enterprise'
+let g:netrw_dirhist_1='/home/adam/PS/infra/provision-auto/clusters'
+let g:netrw_dirhist_0='/home/adam/PS/images/box-ec2-nessus'
+let g:netrw_dirhist_9='/home/adam/PS/images/box-ec2-metrics'

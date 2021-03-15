@@ -29,7 +29,13 @@ set ignorecase
 " pretty stuff
 set t_Co=256
 set guifont=Monospace\ 12 
-colorscheme badwolf 
+colorscheme badwolf
+
+if &term =~# '256color' && ( &term =~# '^screen'  || &term =~# '^tmux' )
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+endif
 
 
 " Status line
@@ -54,18 +60,10 @@ let g:netrw_liststyle=3
 let g:netrw_winsize = 25
 
 
-" Esay color for diff
-highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
-
-
 "Custom Generic Highlights 
 highlight red cterm=bold ctermbg=darkred guibg=darkred
 highlight green cterm=bold ctermbg=darkgreen guibg=darkgreen
 highlight blue cterm=bold ctermbg=darkblue guibg=darkblue
-
 
 "===========================================================================
 "====================== Macros and custom Bindings =========================
@@ -110,6 +108,10 @@ nnoremap <leader>u :UndotreeToggle<cr>
 "--Ack-Vim---------------------------------------------------
 noremap <Leader>a :Ack <cword><cr>
 
+
+"diable tab overriding
+let g:vimwiki_key_mappings = { 'VimwikiNextLink' : 0, 'VimwikiPrevLink': 0 }
+
 "===========================================================================
 "============================= File specific ===============================
 "===========================================================================
@@ -119,8 +121,12 @@ noremap <Leader>a :Ack <cword><cr>
 "compile python script with , z 
 au BufEnter,BufRead *.py noremap <silent> <leader>z :w !python3 %<CR>
 
-"make color at word 80
+"make color at word 100
 au BufEnter,BufRead *.py set colorcolumn=110
+
+
+"Rust stuff  ----------------------------------------------
+au BufEnter,BufRead *.rs set colorcolumn=110
 
 "Jenkins stuff ----------------------------------------------
 autocmd BufRead,BufNewFile *[jJ]enkins* set syntax=groovy 
@@ -132,7 +138,16 @@ au BufEnter,BufRead *.sh set nonu
 autocmd BufRead,BufNewFile *[Mm]ake* set noet 
 
 "YAML
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+"autocmd FileType yaml setlocal ts=2 sts=2 sw=2 "expandtab
+
+"Puppet
+au BufRead,BufNewFile *.pp setfiletype puppet
+
+
+"Wiki
+au BufEnter,BufRead *.wiki set paste 
+au BufEnter,BufRead *.wiki set nonu 
+let g:vimwiki_key_mappings = { 'VimwikiNextLink' : 0, 'VimwikiPrevLink': 0 }
 
 
 "===========================================================================
@@ -166,6 +181,3 @@ command! -nargs=1 -complete=command Redir silent call Redir(<f-args>)
 " Load all plugins now.
 " Plugins need to be added to runtimepath before helptags can be generated.
 packloadall
-" Load all of the helptags now, after plugins have been loaded.
-" All messages and errors will be ignored.
-silent! helptags ALL

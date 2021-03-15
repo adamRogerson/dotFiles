@@ -43,16 +43,10 @@ fi
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
+#PS1='\[$(tput sc; tput rc)\][\u: \e[0;31m\]\w\[\e[0m\]]$(__git_ps1 " {%s}")> '
+#PS1='\[[\u: \e[0;31m\]\w\[\e[0m\]]$(__git_ps1 " {%s}")]\> '
+PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
 
-#rightprompt()
-#{
-#    TIME=$(date "+%I:%M")
-#    printf "%*s" $COLUMNS "$TIME"
-#}
-#PROMPT_DIRTRIM=2
-
-#PS1='\[$(tput sc; rightprompt; tput rc)\][\u:\e[0;31m\]\w\[\e[0m\]]$ '
-PS1='\[$(tput sc; tput rc)\][\u: \e[0;31m\]\w\[\e[0m\]]$(__git_ps1 " {%s}")> '
 
 
 # enable programmable completion features (you don't need to enable
@@ -76,3 +70,22 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 #ADD colors to gcc output
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+export VAGRANT_DEFAULT_PROVIDER=libvirt
+export VAGRANT_DEFAULT_PROVIDER=libvirt
+
+# BEGIN SNIPPET: Platform.sh CLI configuration
+HOME=${HOME:-'/home/adam'}
+export PATH="$HOME/"'.platformsh/bin':"$PATH"
+if [ -f "$HOME/"'.platformsh/shell-config.rc' ]; then . "$HOME/"'.platformsh/shell-config.rc'; fi # END SNIPPET
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# BEGIN SNIPPET: Magento Cloud CLI configuration
+HOME=${HOME:-'/home/adam'}
+export PATH="$HOME/"'.magento-cloud/bin':"$PATH"
+if [ -f "$HOME/"'.magento-cloud/shell-config.rc' ]; then . "$HOME/"'.magento-cloud/shell-config.rc'; fi # END SNIPPET
+
+# BEGIN SNIPPET: SymfonyCloud (PHP) CLI configuration
+HOME=${HOME:-'/home/adam'}
+export PATH="$HOME/"'.symfony-cloud-cli/bin':"$PATH"
+if [ -f "$HOME/"'.symfony-cloud-cli/shell-config.rc' ]; then . "$HOME/"'.symfony-cloud-cli/shell-config.rc'; fi # END SNIPPET

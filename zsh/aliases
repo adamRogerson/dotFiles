@@ -1,0 +1,33 @@
+#Basic=============================================================
+# enable color support 
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias tree='tree -L 2 -C'
+
+# Simple commands 
+alias ll='ls -Atl --group-directories-first'
+alias ..="cd .."
+
+alias zap='xclip -sel c < '
+alias get='/home/adam/Personal/scripts/pd_tmux.sh'
+
+alias plat='cd ~/PS; tree -L 1'
+
+alias all='/home/adam/Personal/scripts/for_all.sh'
+alias one='/home/adam/Personal/scripts/for_one.sh'
+alias go='/home/adam/Personal/scripts/go.sh'
+alias grab='/home/adam/Personal/scripts/grabber.sh'
+
+alias go_toolbox= '~/PS/toolbox'
+alias go_mc='/home/adam/PS/config/magento-cloud-enterprise/'
+alias go_ps='/home/adam/PS/config/platformsh-enterprise/'
+alias go_master='git checkout master; git fetch; git pull'
+
+alias brand='find ~/PS/config/ -name'
+
+
+alias d='dirs -v'
+for index ({0..25}) alias "$index"="cd +${index}"; unset index
+
