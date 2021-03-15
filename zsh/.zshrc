@@ -55,7 +55,7 @@ export LC_ALL=en_IE
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='mvim'
+  export EDITOR='nvim'
 fi
 
 
