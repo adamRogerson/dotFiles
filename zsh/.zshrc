@@ -46,11 +46,8 @@ setopt appendhistory
 source $ZSH/oh-my-zsh.sh
 source $HOME/Personal/dotFiles/zsh/aliases
 
-# User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
+#LANG
 export LANGUAGE=en_IE
 export LANG=en_IE.UTF-0
 export LC_ALL=en_IE
@@ -60,6 +57,14 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   export EDITOR='mvim'
 fi
+
+
+#Tmux to start on start
+if [[ ! $TERM =~ screen ]]; then
+    exec tmux
+fi
+
+
 
 #My own keys
 bindkey "^P" up-line-or-search
