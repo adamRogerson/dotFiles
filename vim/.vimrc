@@ -101,14 +101,6 @@ nmap <Tab> :bnext<CR>
 nnoremap q<Tab> :bp\|bd #<CR>
 map <Leader>b :ls<CR>:b<space>
 
-
-"--Undotree--------------------------------------------------
-nnoremap <leader>u :UndotreeToggle<cr>
-
-"--Ack-Vim---------------------------------------------------
-noremap <Leader>a :Ack <cword><cr>
-
-
 "diable tab overriding
 let g:vimwiki_key_mappings = { 'VimwikiNextLink' : 0, 'VimwikiPrevLink': 0 }
 
@@ -127,6 +119,14 @@ au BufEnter,BufRead *.py set colorcolumn=110
 
 "Rust stuff  ----------------------------------------------
 au BufEnter,BufRead *.rs set colorcolumn=110
+"autocmd BufWritePost *.rs 
+"set NeomakeProject cargo
+
+"let s:quitting = 0
+"au QuitPre *.rs let s:quitting = 1
+"au BufEnter *.rs let s:quitting = 0
+"au BufWritePost *.rs if ! s:quitting | Neomake | else | echom "Neomake disabled"| endif
+"let g:neomake_warning_sign = {'text': '?'}
 
 "Jenkins stuff ----------------------------------------------
 autocmd BufRead,BufNewFile *[jJ]enkins* set syntax=groovy 
@@ -135,14 +135,13 @@ autocmd BufRead,BufNewFile *[jJ]enkins* set syntax=groovy
 au BufEnter,BufRead *.sh set nonu 
 
 "Make -------------------------------------------------------
-autocmd BufRead,BufNewFile *[Mm]ake* set noet 
+"autocmd BufRead,BufNewFile *[Mm]ake* set noet 
 
 "YAML
 "autocmd FileType yaml setlocal ts=2 sts=2 sw=2 "expandtab
 
 "Puppet
 au BufRead,BufNewFile *.pp setfiletype puppet
-
 
 "Wiki
 au BufEnter,BufRead *.wiki set paste 

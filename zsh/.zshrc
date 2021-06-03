@@ -19,16 +19,13 @@ autoload bashcompinit && bashcompinit
 export AWS_PROFILE=saml
 
 
-#autoload -Uz vcs_info
-#precmd_vcs_info() { vcs_info }
-#precmd_functions+=( precmd_vcs_info )
-#setopt prompt_subst
-#RPROMPT=\$vcs_info_msg_0_
-#zstyle ':vcs_info:git:*' formats '%F{green}(%b)%r%f'
-#zstyle ':vcs_info:*' enable git
-
-# Uncomment the following line to enable command auto-correction.
-#ENABLE_CORRECTION="true"
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+setopt prompt_subst
+RPROMPT=\$vcs_info_msg_0_
+zstyle ':vcs_info:git:*' formats '%F{green}(%b)%r%f'
+zstyle ':vcs_info:*' enable git
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -41,7 +38,7 @@ setopt appendhistory
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/Personal/dotFiles/zsh/aliases
@@ -54,16 +51,7 @@ export LC_ALL=en_IE
 
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
-else
-  export EDITOR='nvim'
 fi
-
-
-#Tmux to start on start
-if [[ ! $TERM =~ screen ]]; then
-    exec tmux
-fi
-
 
 
 #My own keys
@@ -90,3 +78,9 @@ if [ -f "$HOME/"'.symfony-cloud-cli/shell-config.rc' ]; then . "$HOME/"'.symfony
 
 # Created by `userpath` on 2020-10-16 10:07:34
 export PATH="$PATH:/home/adam/.local/bin"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/adam/google-cloud-sdk/path.zsh.inc' ]; then . '/home/adam/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/adam/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/adam/google-cloud-sdk/completion.zsh.inc'; fi

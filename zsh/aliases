@@ -31,3 +31,7 @@ alias brand='find ~/PS/config/ -name'
 alias d='dirs -v'
 for index ({0..25}) alias "$index"="cd +${index}"; unset index
 
+
+alias og='poetry run psh_og'
+
+
